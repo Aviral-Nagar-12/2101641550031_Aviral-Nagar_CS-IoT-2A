@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node*next;
+};
+struct node* reverse(struct node*head){
+	if(head==NULL || head->next==NULL){
+		return head;
+	}
+	struct node*first;
+	struct node*new1;
+	new1=reverse(head->next);
+	first=head->next;
+	first->next=head;
+	head->next=NULL;
+	return new1;
+	
+}
+
+struct node*insert(struct node*pt,int value){
+	struct node*temp;
+	struct node*ptr1=(struct node*)malloc(sizeof(struct node));
+	ptr1->data=value;
+	ptr1->next=NULL;
+	if(pt==NULL){
+		ptr1->next=pt;
+		pt=ptr1;
+	}
+	else{
+		temp=pt;
+		while(temp->next!=NULL){
+			temp=temp->next;
+		}
+		ptr1->next=temp->next;
+		temp->next=ptr1;
+		
+	}
+	return pt;
+}
+struct node* create(struct node*ptr){
+	int n,value;
+	printf("Enter the terms of nodes\n");
+	scanf("%d",&n);
+	for(int i=0;i<n;i++){
+		printf("Enter the data of %d node",i+1);
+		scanf("%d",&value);
+		ptr=insert(ptr,value);
+	}
+	return ptr;
+}
+void display(struct node*head){
+	/*if(head==NULL){
+		return head;
+	}*/
+	{
+		struct node*temp=head;
+		while(temp!=NULL){
+			printf("%d\t",temp->data);
+			temp=temp->next;
+		}
+	}
+}
+int main(){
+	struct node*head=NULL;
+	head=create(head);
+	display(head);
+	printf("\n");
+	printf("Linked list after reverse\n");
+	head=reverse(head);
+	display(head);
+}
