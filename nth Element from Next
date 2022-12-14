@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node*next;
+};
+void nth_end(struct node*head)
+{
+	int pos,pos1,count=0;
+	printf("Enter the position : \n");
+	scanf("%d",&pos);
+	struct node*s=head;
+	pos1=pos;
+	while(s!=NULL)
+	{
+		s=s->next;
+		count++;
+	}
+	s=head;
+	int x=(count-pos)+1;
+	while(x>1)
+	{
+		s=s->next;
+		x--;
+	}
+	printf("Data of %dth element : %d\n",pos1,s->data);
+}
+
+struct node*insert(struct node*pt,int value){
+	struct node*temp;
+	struct node*ptr1=(struct node*)malloc(sizeof(struct node));
+	ptr1->data=value;
+	ptr1->next=NULL;
+	if(pt==NULL){
+		ptr1->next=pt;
+		pt=ptr1;
+	}
+	else{
+		temp=pt;
+		while(temp->next!=NULL){
+			temp=temp->next;
+		}
+		ptr1->next=temp->next;
+		temp->next=ptr1;
+		
+	}
+	return pt;
+}
+struct node* create(struct node*ptr){
+	int n,value;
+	printf("Enter the terms of nodes\n");
+	scanf("%d",&n);
+	for(int i=0;i<n;i++){
+		printf("Enter the data of %d node",i+1);
+		scanf("%d",&value);
+		ptr=insert(ptr,value);
+	}
+	return ptr;
+}
+void display(struct node*head){
+	{
+		struct node*temp=head;
+		while(temp!=NULL){
+			printf("%d\t",temp->data);
+			temp=temp->next;
+		}
+	}
+}
+int main(){
+	struct node*head=NULL;
+	head=create(head);
+	nth_end(head);
+    
+}
