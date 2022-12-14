@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node*next;
+};
+void push(struct node* p,int newdata){
+	struct node* ptr;
+	ptr=(struct node*)malloc(sizeof(struct node));
+	ptr->data=newdata;
+	ptr->next=p->next;
+	p->next=ptr;
+}
+void traverse(struct node* ptr){
+	while(ptr!=NULL){
+		printf("ELEMENT : %d\n",ptr->data);
+		ptr=ptr->next;
+	}
+	
+	
+}
+int main()
+{
+	struct node* head;
+	struct node*second;
+	struct node*third;
+	head=(struct node*)malloc(sizeof(struct node));
+	second=(struct node*)malloc(sizeof(struct node));
+	third=(struct node*)malloc(sizeof(struct node));
+	head->data=7;
+	head->next=second;
+	
+	second->data=70;
+	second->next=third;
+	
+	third->data=45;
+	third->next=NULL;
+	push(head,55);
+	traverse(head);
+}
