@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node*next;
+};
+struct node* head;
+void pop(int value){
+	struct node* p=head;
+	struct node* q=head->next;
+	while(q->data!=value && q->next!=NULL){
+		p=p->next;
+		q=q->next;
+	}
+	if(q->data==value){
+		p->next=q->next;
+		free(q);
+	}
+}
+void traverse(struct node* ptr){
+	while(ptr!=NULL){
+		printf("ELEMENT : %d\n",ptr->data);
+		ptr=ptr->next;
+	}
+	
+	
+}
+int main()
+{
+	
+	struct node*second;
+	struct node*third;
+	head=(struct node*)malloc(sizeof(struct node));
+	second=(struct node*)malloc(sizeof(struct node));
+	third=(struct node*)malloc(sizeof(struct node));
+	head->data=7;
+	head->next=second;
+	
+	second->data=70;
+	second->next=third;
+	
+	third->data=45;
+	third->next=NULL;
+    pop(70);
+ //   pop();
+	traverse(head);
+}
